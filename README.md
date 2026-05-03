@@ -5,6 +5,12 @@ The application helps recruiters automate the first round of hiring by collectin
 
 ---
 
+# 🚀 Live Demo
+
+🔗 (https://talentscouthiringassistant-cywagkmnmtdx6fbem3uxs2.streamlit.app/)
+
+---
+
 # 📌 Project Overview
 
 TalentScout AI Hiring Assistant is designed for recruitment agencies and HR teams to simplify the early-stage screening process.
@@ -101,14 +107,32 @@ TalentScout_Hiring_Assistant/
 │── .env
 │── .gitignore
 │── data/
-│   └── candidates.json
+│ └── candidates.json
+│── screenshots/
+│ ├── form.png
+│ └── result.png
 │── utils/
-│   ├── __init__.py
-│   ├── validators.py
-│   ├── storage.py
-│   ├── llm.py
-│   └── prompts.py
+│ ├── __init__.py
+│ ├── validators.py
+│ ├── storage.py
+│ ├── llm.py
+│ └── prompts.py
 ```
+
+---
+
+# 📸 Project Screenshots 
+
+## 📝 Candidate Information Form 
+
+This screen collects candidate details such as name, email, phone number, experience, desired role, location, and tech stack. 
+![Candidate Form](screenshots/form.png) 
+--- 
+
+## 📊 AI Evaluation Dashboard 
+
+After submission, the assistant evaluates candidate answers using AI, gives scores, feedback, final score, and hiring recommendation. 
+![Evaluation Dashboard](screenshots/result.png)
 
 ---
 
@@ -117,7 +141,7 @@ TalentScout_Hiring_Assistant/
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone <your-github-repo-link>
+git clone (https://github.com/AkarshKumar1/TalentScout_Hiring_Assistant)
 cd TalentScout_Hiring_Assistant
 ```
 
@@ -136,7 +160,7 @@ pip install -r requirements.txt
 Create a `.env` file in the root folder:
 
 ```env
-GEMINI_API_KEY=your_api_key_here
+GEMINI_API_KEY=My_Gemini_API_Key
 ```
 
 ---
@@ -162,7 +186,7 @@ Steps:
 5. Add secret:
 
 ```toml
-GEMINI_API_KEY="your_api_key_here"
+GEMINI_API_KEY=My_Gemini_API_Key
 ```
 
 ---
@@ -226,4 +250,4 @@ Passionate about AI, Machine Learning, and Real-World Product Development.
 
 # ⭐ Final Note
 
-This project was developed as part of an AI/ML Internship Assignment to demonstrate practical implementation of LLM-powered hiring automation.
+This project was developed as part of an AI/ML Internship Assignment to demonstrate the practical implementation of LLM-powered hiring automation.

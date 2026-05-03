@@ -1,15 +1,14 @@
 import os
 import json
 import random
+import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
 from utils.prompts import QUESTION_PROMPT, EVAL_PROMPT
 
 load_dotenv(override=True)
 
-key = os.getenv("GEMINI_API_KEY")
-
-print("Loaded Key:", key[:10])   # optional debug
+key = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
 
 genai.configure(api_key=key)
 
