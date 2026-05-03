@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
 from utils.prompts import QUESTION_PROMPT, EVAL_PROMPT
