@@ -5,6 +5,12 @@ The application helps recruiters automate the first round of hiring by collectin
 
 ---
 
+# 🚀 Live Demo
+
+🔗 (https://talentscouthiringassistant-cywagkmnmtdx6fbem3uxs2.streamlit.app/)
+
+---
+
 # 📌 Project Overview
 
 TalentScout AI Hiring Assistant is designed for recruitment agencies and HR teams to simplify the early-stage screening process.
@@ -101,14 +107,32 @@ TalentScout_Hiring_Assistant/
 │── .env
 │── .gitignore
 │── data/
-│   └── candidates.json
+│ └── candidates.json
+│── screenshots/
+│ ├── form.png
+│ └── result.png
 │── utils/
-│   ├── __init__.py
-│   ├── validators.py
-│   ├── storage.py
-│   ├── llm.py
-│   └── prompts.py
+│ ├── __init__.py
+│ ├── validators.py
+│ ├── storage.py
+│ ├── llm.py
+│ └── prompts.py
 ```
+
+---
+
+# 📸 Project Screenshots 
+
+## 📝 Candidate Information Form 
+
+This screen collects candidate details such as name, email, phone number, experience, desired role, location, and tech stack. 
+![Candidate Form](screenshots/form.png) 
+--- 
+
+## 📊 AI Evaluation Dashboard 
+
+After submission, the assistant evaluates candidate answers using AI, gives scores, feedback, final score, and hiring recommendation. 
+![Evaluation Dashboard](screenshots/result.png)
 
 ---
 
