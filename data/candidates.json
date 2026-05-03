@@ -1,0 +1,358 @@
+[
+    {
+        "name": "Akarsh Kumar",
+        "email": "akrtsgh.236@gmail.com",
+        "phone": "9060139457",
+        "experience": 1,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "Python,  MySQL"
+    },
+    {
+        "name": "Akarsh Kumar",
+        "email": "akrtsgh.236@gmail.com",
+        "phone": "9060139457",
+        "experience": 1,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "Python,  MySQL"
+    },
+    {
+        "name": "Alex Watkins ",
+        "email": "alex.wat123@gmail.com",
+        "phone": "9060139448",
+        "experience": 2,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "Python, MySQL",
+        "answers": {
+            "What is the difference between list and tuple in Python?": "thsvsbbsjabia",
+            "What projects have you built using mysql?": "gtuhoassaha"
+        }
+    },
+    {
+        "name": "Alex Watkins ",
+        "email": "alex.wat123@gmail.com",
+        "phone": "9060139448",
+        "experience": 2,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "Python, MySQL",
+        "answers": {
+            "What is the difference between list and tuple in Python?": "thsvsbbsjabia",
+            "What projects have you built using mysql?": "gtuhoassaha"
+        }
+    },
+    {
+        "name": "Alex Watkins ",
+        "email": "alex.wat123@gmail.com",
+        "phone": "9060139448",
+        "experience": 2,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "Python, MySQL",
+        "answers": {
+            "What is the difference between list and tuple in Python?": "thsvsbbsjabia",
+            "What projects have you built using mysql?": "gtuhoassaha"
+        }
+    },
+    {
+        "name": "Alex Watkins ",
+        "email": "alex.wat123@gmail.com",
+        "phone": "9060139448",
+        "experience": 2,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "Python, MySQL",
+        "answers": {
+            "What is the difference between list and tuple in Python?": "thsvsbbsjabia",
+            "What projects have you built using mysql?": "gtuhoassaha"
+        }
+    },
+    {
+        "name": "Alex Watkins ",
+        "email": "alex.wat123@gmail.com",
+        "phone": "9060139448",
+        "experience": 1,
+        "position": "AIML Engineer ",
+        "location": "Greater Noida",
+        "tech_stack": "MySQL",
+        "answers": {
+            "What is JOIN in SQL?": "Join is a function used to merge two diffrent tables on a same column.",
+            "Difference between WHERE and HAVING?": "Where is a clause statement used in a simple query along with anything to find anything in the table but having is a clause statement which can only ne used by group by () function."
+        },
+        "final_score": 9
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 2,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is the unique key which is used to identify a particular table ",
+                "score": 5,
+                "feedback": "API key missing. Manual review needed.",
+                "result": "Review"
+            },
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator used to merge two different tables based on a related column. It is of three types, and they are: Inner JOIN, Right JOIN, Left JOIN",
+                "score": 5,
+                "feedback": "API key missing. Manual review needed.",
+                "result": "Review"
+            }
+        ],
+        "score": 10
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 2,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator used to merge two different tables based on a related column",
+                "score": 5,
+                "feedback": "API key missing. Manual review needed.",
+                "result": "Review"
+            },
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is a unique key used to identify a particular table ",
+                "score": 5,
+                "feedback": "API key missing. Manual review needed.",
+                "result": "Review"
+            }
+        ],
+        "score": 10
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator used to merge two different tables based on a related column",
+                "score": 5,
+                "feedback": "API key missing. Manual review needed.",
+                "result": "Review"
+            },
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is a unique key used to identify a particular table ",
+                "score": 5,
+                "feedback": "API key missing. Manual review needed.",
+                "result": "Review"
+            }
+        ],
+        "score": 10
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator used to merge two different tables based on a related column",
+                "score": 6,
+                "feedback": "Answer received. Manual review recommended.",
+                "result": "Partial"
+            },
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is a unique key used to identify a particular table in a database ",
+                "score": 6,
+                "feedback": "Answer received. Manual review recommended.",
+                "result": "Partial"
+            }
+        ],
+        "score": 12
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 2,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is a unique key used to  identify a particular table in a database ",
+                "score": 6,
+                "feedback": "Answer received. Manual review recommended.",
+                "result": "Partial"
+            },
+            {
+                "question": "Difference between WHERE and HAVING?",
+                "answer": "Where is a clause statement used to filter on the basis of rows and having is a clause used to filter on the basis of groups by using in only group by() function ",
+                "score": 6,
+                "feedback": "Answer received. Manual review recommended.",
+                "result": "Partial"
+            }
+        ],
+        "score": 12
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQl",
+        "results": [
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator used to merge two diffrent tables ",
+                "score": 6,
+                "feedback": "Parsing failed: 400 API key not valid. Please pass a valid API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key not valid. Please pass a valid API key.\"\n]",
+                "result": "Partial"
+            },
+            {
+                "question": "What is primary key?",
+                "answer": "",
+                "score": 6,
+                "feedback": "Parsing failed: 400 API key not valid. Please pass a valid API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key not valid. Please pass a valid API key.\"\n]",
+                "result": "Partial"
+            }
+        ],
+        "score": 12
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is a unique key used to identify a table ",
+                "score": 6,
+                "feedback": "Parsing failed: 400 API key not valid. Please pass a valid API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key not valid. Please pass a valid API key.\"\n]",
+                "result": "Partial"
+            },
+            {
+                "question": "Difference between WHERE and HAVING?",
+                "answer": "",
+                "score": 6,
+                "feedback": "Parsing failed: 400 API key not valid. Please pass a valid API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key not valid. Please pass a valid API key.\"\n]",
+                "result": "Partial"
+            }
+        ],
+        "score": 12
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator ",
+                "score": 2,
+                "feedback": "The statement 'Join is an operator' is technically correct, as JOIN operations do perform an operation on relations (tables). However, this answer is extremely brief and lacks any detail on the fundamental purpose of JOIN (to combine rows from two or more tables), how it works, or its different types (e.g., INNER, LEFT, RIGHT, FULL). It only provides a minimal conceptual understanding.",
+                "result": "Partially Correct"
+            }
+        ],
+        "score": 2
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is primary key?",
+                "answer": "Primary Key is a unique key used to identify a particular table in a database",
+                "score": 2,
+                "feedback": "The candidate correctly identified that a Primary Key is a unique key, which is an important property. However, the answer incorrectly states that a Primary Key is used to identify a 'particular table'. The fundamental purpose of a Primary Key is to uniquely identify *rows* (or records/tuples) within a *table*, not the table itself. Tables are identified by their names. This indicates a significant misunderstanding of the primary role and function of a primary key in a relational database.",
+                "result": "Incorrect"
+            }
+        ],
+        "score": 2
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 0,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "Difference between WHERE and HAVING?",
+                "answer": "",
+                "score": 0,
+                "feedback": "No answer submitted by candidate.",
+                "result": "Unanswered"
+            },
+            {
+                "question": "What is JOIN in SQL?",
+                "answer": "Join is an operator used to merge two different tables on related column",
+                "score": 7,
+                "feedback": "The candidate correctly identifies JOIN as an operator used to merge or combine data from two different tables, and correctly points out that this is done 'on related column'. This covers the fundamental purpose and mechanism of a JOIN. To be more comprehensive, the answer could elaborate on how the 'merging' happens based on a specified condition (e.g., using an `ON` clause) and that it produces a new result set. Mentioning different types of joins (INNER, LEFT, etc.) would also demonstrate a deeper understanding.",
+                "result": "Correct"
+            }
+        ],
+        "score": 7
+    },
+    {
+        "name": "Alex Watkins",
+        "email": "alex.wat12@gmail.com",
+        "phone": "9645684521",
+        "experience": 1,
+        "role": "AIML Engineer",
+        "location": "Greater Noida ",
+        "tech_stack": "SQL",
+        "results": [
+            {
+                "question": "What is primary key?",
+                "answer": "Primary key is an unique key used to identiy the parent row or column in a table",
+                "score": 3,
+                "feedback": "The candidate correctly identified that a primary key is 'unique'. This is a fundamental property. However, the answer is incomplete as it misses the crucial property that a primary key cannot contain NULL values (non-nullable). More significantly, the purpose described, 'to identiy the parent row or column in a table', is incorrect and confusing. A primary key's fundamental role is to uniquely identify *each individual record (row)* within *its own table*. The concept of 'parent row' is typically associated with foreign keys establishing relationships, not the primary key's direct function within its table.",
+                "result": "Partially Correct"
+            },
+            {
+                "question": "Difference between WHERE and HAVING?",
+                "answer": "",
+                "score": 0,
+                "feedback": "No answer submitted by candidate.",
+                "result": "Unanswered"
+            }
+        ],
+        "score": 3
+    }
+]
