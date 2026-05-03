@@ -136,7 +136,7 @@ pip install -r requirements.txt
 Create a `.env` file in the root folder:
 
 ```env
-GEMINI_API_KEY=AIzaSyB2QLoqRMkIbhjJCMn9w7r8SKZFmunNcDc
+GEMINI_API_KEY=My_Gemini_API_Key
 ```
 
 ---
@@ -162,7 +162,7 @@ Steps:
 5. Add secret:
 
 ```toml
-GEMINI_API_KEY=AIzaSyB2QLoqRMkIbhjJCMn9w7r8SKZFmunNcDc
+GEMINI_API_KEY=My_Gemini_API_Key
 ```
 
 ---
