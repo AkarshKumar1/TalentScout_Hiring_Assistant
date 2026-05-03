@@ -117,7 +117,7 @@ TalentScout_Hiring_Assistant/
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone <your-github-repo-link>
+git clone (https://github.com/AkarshKumar1/TalentScout_Hiring_Assistant)
 cd TalentScout_Hiring_Assistant
 ```
 
@@ -136,7 +136,7 @@ pip install -r requirements.txt
 Create a `.env` file in the root folder:
 
 ```env
-GEMINI_API_KEY=your_api_key_here
+GEMINI_API_KEY=AIzaSyB2QLoqRMkIbhjJCMn9w7r8SKZFmunNcDc
 ```
 
 ---
@@ -162,7 +162,7 @@ Steps:
 5. Add secret:
 
 ```toml
-GEMINI_API_KEY="your_api_key_here"
+GEMINI_API_KEY=AIzaSyB2QLoqRMkIbhjJCMn9w7r8SKZFmunNcDc
 ```
 
 ---
@@ -226,4 +226,4 @@ Passionate about AI, Machine Learning, and Real-World Product Development.
 
 # ⭐ Final Note
 
-This project was developed as part of an AI/ML Internship Assignment to demonstrate practical implementation of LLM-powered hiring automation.
+This project was developed as part of an AI/ML Internship Assignment to demonstrate the practical implementation of LLM-powered hiring automation.
