@@ -4,16 +4,21 @@ import random
 import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
-from utils.prompts import QUESTION_PROMPT, EVAL_PROMPT
 
 load_dotenv(override=True)
 
+# 🔐 Secure key loading
 key = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
 
-genai.configure(api_key=key)
+# Configure model safely
+if key:
+    genai.configure(api_key=key)
+    model = genai.GenerativeModel("models/gemini-1.5-flash")
+else:
+    model = None
 
-model = genai.GenerativeModel("models/gemini-2.5-flash")
 
+# 🎯 Question Bank
 BANK = {
     "python": [
         "What is list vs tuple?",
@@ -37,6 +42,8 @@ BANK = {
     ]
 }
 
+
+# 🧠 Generate Questions
 def generate_questions(tech):
     skills = [x.strip().lower() for x in tech.split(",")]
     qs = []
@@ -49,74 +56,105 @@ def generate_questions(tech):
 
     return qs[:5]
 
-def evaluate_answer(question, answer):
-    if not model or not key:
-        return {
-            "score": 5,
-            "feedback": "AI service unavailable. Manual review recommended.",
-            "result": "Review"
-        }
 
+# 🟡 Local fallback evaluator (ALWAYS WORKS)
+def local_evaluate(question, answer):
+    keywords = {
+        "primary key": ["unique", "not null", "identifier"],
+        "join": ["combine", "tables", "rows", "condition"],
+        "oop": ["class", "object", "inheritance", "polymorphism"],
+    }
+
+    score = 0
+    answer_lower = answer.lower()
+
+    for key, words in keywords.items():
+        if key in question.lower():
+            for word in words:
+                if word in answer_lower:
+                    score += 2
+
+    score = min(score, 10)
+
+    return {
+        "score": score if score > 0 else 5,
+        "feedback": "Basic evaluation applied based on keywords.",
+        "result": "Fallback"
+    }
+
+
+# ⚡ Cache to reduce API calls
+@st.cache_data
+def cached_ai_eval(question, answer):
     prompt = f"""
 You are a technical interviewer.
 
 Evaluate the candidate answer.
 
 Question: {question}
-
 Candidate Answer: {answer}
 
 Rules:
-- Give fair technical score out of 10
-- Be strict but reasonable
-- Return ONLY pure JSON
+- Score out of 10
+- Be strict but fair
+- Return ONLY JSON
 
 Example:
 {{
   "score": 8,
-  "feedback": "Good answer with correct fundamentals.",
+  "feedback": "Good understanding.",
   "result": "Correct"
 }}
 """
 
-    try:
-        response = model.generate_content(prompt)
-        text = response.text.strip()
+    response = model.generate_content(prompt)
+    text = response.text.strip()
 
-        # Clean response
-        text = text.replace("```json", "").replace("```", "").strip()
+    text = text.replace("```json", "").replace("```", "").strip()
 
-        start = text.find("{")
-        end = text.rfind("}") + 1
+    start = text.find("{")
+    end = text.rfind("}") + 1
 
-        if start == -1 or end == 0:
-            raise Exception("Invalid AI response")
+    if start == -1 or end == 0:
+        raise Exception("Invalid JSON")
 
-        json_text = text[start:end]
-        data = json.loads(json_text)
+    data = json.loads(text[start:end])
 
+    return {
+        "score": int(data.get("score", 6)),
+        "feedback": data.get("feedback", "Evaluated."),
+        "result": data.get("result", "Partial")
+    }
+
+
+# 🧠 Main evaluation function
+def evaluate_answer(question, answer, index=0):
+
+    # ❌ Empty answer
+    if answer.strip() == "":
         return {
-            "score": int(data.get("score", 6)),
-            "feedback": data.get("feedback", "Answer evaluated."),
-            "result": data.get("result", "Partial")
+            "score": 0,
+            "feedback": "No answer submitted.",
+            "result": "Unanswered"
         }
 
-    except Exception as e:
+    # 🔥 LIMIT API USAGE (only first 2 questions use AI)
+    if index < 2 and model:
+        try:
+            return cached_ai_eval(question, answer)
 
-        error_text = str(e).lower()
+        except Exception as e:
+            error_text = str(e).lower()
 
-        # 🔥 HANDLE API KEY / NETWORK ERRORS CLEANLY
-        if "api key" in error_text or "403" in error_text or "quota" in error_text:
-            return {
-                "score": 5,
-                "feedback": "AI evaluation temporarily unavailable. Manual review recommended.",
-                "result": "Unavailable"
-            }
+            # 🚨 Handle API issues cleanly
+            if "quota" in error_text or "rate" in error_text:
+                return local_evaluate(question, answer)
 
-        # Generic fallback
-        return {
-            "score": 6,
-            "feedback": "Answer received. Evaluation completed with fallback logic.",
-            "result": "Partial"
-        }
+            if "api key" in error_text or "403" in error_text:
+                return local_evaluate(question, answer)
+
+            return local_evaluate(question, answer)
+
+    # 🟡 Fallback for remaining questions
+    return local_evaluate(question, answer)
         
