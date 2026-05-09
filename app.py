@@ -13,7 +13,9 @@ st.set_page_config(
 )
 
 st.title("🤖 TalentScout AI Hiring Assistant")
-st.caption("Conversational AI-powered hiring assistant for initial candidate screening.")
+st.caption(
+    "Conversational AI-powered hiring assistant for initial candidate screening."
+)
 
 # --------------------------------
 # SESSION STATE
@@ -37,8 +39,11 @@ if st.session_state.stage == "form":
     with st.form("candidate_form"):
 
         name = st.text_input("Full Name")
+
         email = st.text_input("Email Address")
+
         phone = st.text_input("Phone Number")
+
         experience = st.number_input(
             "Years of Experience",
             min_value=0,
@@ -47,25 +52,34 @@ if st.session_state.stage == "form":
         )
 
         role = st.text_input("Desired Position")
+
         location = st.text_input("Current Location")
+
         tech_stack = st.text_area(
             "Tech Stack (Python, SQL, React, Machine Learning etc.)"
         )
 
         submitted = st.form_submit_button("Start Screening")
 
+    # --------------------------------
+    # FORM VALIDATION
+    # --------------------------------
     if submitted:
 
         if not validate_email(email):
+
             st.error("❌ Please enter a valid email address.")
 
         elif not validate_phone(phone):
+
             st.error("❌ Please enter a valid 10-digit phone number.")
 
         elif tech_stack.strip() == "":
+
             st.error("❌ Please enter your tech stack.")
 
         else:
+
             st.session_state.candidate = {
                 "name": name,
                 "email": email,
@@ -76,8 +90,11 @@ if st.session_state.stage == "form":
                 "tech_stack": tech_stack
             }
 
+            # 🧠 Generate AI Questions
             st.session_state.questions = generate_questions(tech_stack)
+
             st.session_state.stage = "questions"
+
             st.rerun()
 
 # --------------------------------
@@ -86,11 +103,16 @@ if st.session_state.stage == "form":
 elif st.session_state.stage == "questions":
 
     st.success("✅ Profile received successfully.")
+
     st.subheader("🧠 Technical Assessment")
 
     with st.form("answers_form"):
 
-        for index, question in enumerate(st.session_state.questions, start=1):
+        for index, question in enumerate(
+            st.session_state.questions,
+            start=1
+        ):
+
             st.write(f"### {index}. {question}")
 
             st.text_area(
@@ -100,24 +122,42 @@ elif st.session_state.stage == "questions":
 
         final_submit = st.form_submit_button("Submit Answers")
 
+    # --------------------------------
+    # ANSWER EVALUATION
+    # --------------------------------
     if final_submit:
 
         results = []
+
         total_score = 0
 
-        for index, question in enumerate(st.session_state.questions, start=1):
+        for index, question in enumerate(
+            st.session_state.questions,
+            start=1
+        ):
 
-            answer = st.session_state.get(f"answer_{index}", "").strip()
+            answer = st.session_state.get(
+                f"answer_{index}",
+                ""
+            ).strip()
 
+            # ❌ Empty Answer
             if answer == "":
+
                 result = {
                     "score": 0,
                     "feedback": "No answer submitted by candidate.",
                     "result": "Unanswered"
                 }
 
+            # 🧠 AI + Fallback Evaluation
             else:
-                result = evaluate_answer(question, answer)
+
+                result = evaluate_answer(
+                    question,
+                    answer,
+                    index=index
+                )
 
             total_score += int(result["score"])
 
@@ -127,44 +167,71 @@ elif st.session_state.stage == "questions":
                 **result
             })
 
+        # 📊 Store Results
         st.session_state.candidate["results"] = results
+
         st.session_state.candidate["score"] = total_score
 
+        # 💾 Save Candidate Data
         save_candidate(st.session_state.candidate)
 
         st.session_state.stage = "result"
+
         st.rerun()
+
 # --------------------------------
 # STAGE 3 : FINAL RESULT
 # --------------------------------
 elif st.session_state.stage == "result":
 
     candidate = st.session_state.candidate
+
     results = candidate["results"]
 
     st.subheader("📊 Candidate Evaluation Report")
 
+    # --------------------------------
+    # SHOW RESULTS
+    # --------------------------------
     for index, item in enumerate(results, start=1):
 
         st.write(f"### Question {index}")
+
         st.write(f"**Q:** {item['question']}")
+
         st.write(f"**Score:** {item['score']}/10")
+
         st.write(f"**Feedback:** {item['feedback']}")
+
         st.markdown("---")
 
+    # --------------------------------
+    # FINAL SCORE
+    # --------------------------------
     max_score = len(results) * 10
+
     final_score = candidate["score"]
 
     st.success(f"🎯 Final Score: {final_score}/{max_score}")
 
+    # --------------------------------
+    # FINAL DECISION
+    # --------------------------------
     if final_score >= max_score * 0.7:
+
         st.success("✅ Recommended for Next Round")
 
     else:
+
         st.warning("⚠️ Needs Improvement")
 
-    st.info("Thank you for completing the TalentScout assessment.")
+    st.info(
+        "Thank you for completing the TalentScout assessment."
+    )
 
+    # --------------------------------
+    # RESET APP
+    # --------------------------------
     if st.button("Start New Candidate"):
 
         for key in list(st.session_state.keys()):
