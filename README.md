@@ -1,13 +1,14 @@
 # 🤖 TalentScout AI Hiring Assistant
 
-An AI-powered hiring assistant built using **Python**, **Streamlit**, and **Google Gemini API** for initial candidate screening.
-The application helps recruiters automate the first round of hiring by collecting candidate details, generating technical questions based on the candidate’s tech stack, evaluating responses using AI, and producing a final assessment report.
+An AI-powered hiring assistant built using **Python**, **Streamlit**, and **Groq API (Llama 3)** for intelligent candidate screening.
+
+The application helps recruiters automate the first round of hiring by collecting candidate details, generating technical questions dynamically based on the candidate’s tech stack, evaluating responses using AI, and producing a final assessment report.
 
 ---
 
 # 🚀 Live Demo
 
-🔗 (https://talentscouthiringassistant-cywagkmnmtdx6fbem3uxs2.streamlit.app/)
+🔗 https://talentscouthiringassistant-cywagkmnmtdx6fbem3uxs2.streamlit.app/
 
 ---
 
@@ -17,13 +18,13 @@ TalentScout AI Hiring Assistant is designed for recruitment agencies and HR team
 
 Instead of manually interviewing every applicant, the assistant:
 
-* Collects candidate profile details
-* Generates skill-based technical questions
-* Accepts candidate answers
-* Uses AI to evaluate answers
-* Provides a score and hiring recommendation
+- Collects candidate profile details
+- Generates AI-based technical questions
+- Accepts candidate answers
+- Evaluates answers using AI
+- Provides score-based feedback and hiring recommendation
 
-This project demonstrates practical use of **LLMs in recruitment workflows**.
+This project demonstrates the practical implementation of **LLMs in recruitment workflows**.
 
 ---
 
@@ -33,47 +34,55 @@ This project demonstrates practical use of **LLMs in recruitment workflows**.
 
 The system collects:
 
-* Full Name
-* Email Address
-* Phone Number
-* Years of Experience
-* Desired Position
-* Current Location
-* Tech Stack
+- Full Name
+- Email Address
+- Phone Number
+- Years of Experience
+- Desired Position
+- Current Location
+- Tech Stack
 
 ---
 
 ## ✅ AI-Based Technical Question Generation
 
-Based on the candidate's declared skills, the system generates technical interview questions for technologies such as:
+Based on the candidate's declared skills, the system dynamically generates technical interview questions using **Llama 3 via Groq API**.
 
-* Python
-* SQL / MySQL
-* React
-* Machine Learning
-* Custom technologies
+Supported technologies include:
+
+- Python
+- SQL / MySQL
+- React
+- Machine Learning
+- Custom technologies
 
 ---
 
 ## ✅ AI Answer Evaluation
 
-Candidate responses are analyzed using **Google Gemini API**, which provides:
+Candidate responses are evaluated using AI and the system provides:
 
-* Score out of 10 for each question
-* Feedback for each answer
-* Final total score
-* Recommendation for next round
+- Score out of 10
+- Technical feedback
+- Final total score
+- Recommendation for next round
+
+---
+
+## ✅ Stable Fallback Evaluation System
+
+To ensure reliability during API rate limits or network failures, the application includes a local fallback evaluation system that prevents the app from crashing and maintains uninterrupted candidate assessment.
 
 ---
 
 ## ✅ Result Dashboard
 
-After assessment, the system shows:
+After assessment, the system displays:
 
-* Individual question scores
-* AI feedback
-* Final score
-* Needs Improvement / Recommended status
+- Individual question scores
+- AI feedback
+- Final score
+- Recommendation status
 
 ---
 
@@ -89,15 +98,15 @@ data/candidates.json
 
 # 🛠️ Tech Stack
 
-* **Python**
-* **Streamlit**
-* **Google Gemini API**
-* **JSON**
-* **dotenv**
+- **Python**
+- **Streamlit**
+- **Groq API (Llama 3)**
+- **JSON**
+- **dotenv**
 
 ---
 
-# 📂 Updated Folder Structure
+# 📂 Folder Structure
 
 ```text
 TalentScout_Hiring_Assistant/
@@ -107,31 +116,33 @@ TalentScout_Hiring_Assistant/
 │── .env
 │── .gitignore
 │── data/
-│ └── candidates.json
+│   └── candidates.json
 │── screenshots/
-│ ├── form.png
-│ └── result.png
+│   ├── form.png
+│   └── result.png
 │── utils/
-│ ├── __init__.py
-│ ├── validators.py
-│ ├── storage.py
-│ ├── llm.py
-│ └── prompts.py
+│   ├── __init__.py
+│   ├── validators.py
+│   ├── storage.py
+│   └── llm.py
 ```
 
 ---
 
-# 📸 Project Screenshots 
+# 📸 Project Screenshots
 
-## 📝 Candidate Information Form 
+## 📝 Candidate Information Form
 
-This screen collects candidate details such as name, email, phone number, experience, desired role, location, and tech stack. 
-![Candidate Form](screenshots/form.png) 
---- 
+This screen collects candidate details such as name, email, phone number, experience, desired role, location, and tech stack.
 
-## 📊 AI Evaluation Dashboard 
+![Candidate Form](screenshots/form.png)
 
-After submission, the assistant evaluates candidate answers using AI, gives scores, feedback, final score, and hiring recommendation. 
+---
+
+## 📊 AI Evaluation Dashboard
+
+After submission, the assistant evaluates candidate answers using AI, provides scores, feedback, final score, and hiring recommendation.
+
 ![Evaluation Dashboard](screenshots/result.png)
 
 ---
@@ -141,7 +152,8 @@ After submission, the assistant evaluates candidate answers using AI, gives scor
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone (https://github.com/AkarshKumar1/TalentScout_Hiring_Assistant)
+git clone https://github.com/AkarshKumar1/TalentScout_Hiring_Assistant.git
+
 cd TalentScout_Hiring_Assistant
 ```
 
@@ -160,7 +172,7 @@ pip install -r requirements.txt
 Create a `.env` file in the root folder:
 
 ```env
-GEMINI_API_KEY=My_Gemini_API_Key
+GROQ_API_KEY=my_groq_api_key
 ```
 
 ---
@@ -177,41 +189,41 @@ streamlit run app.py
 
 This project can be deployed on **Streamlit Community Cloud**.
 
-Steps:
+## Steps:
 
 1. Push project to GitHub
-2. Open Streamlit Cloud
+2. Open Streamlit Community Cloud
 3. Connect GitHub repository
 4. Select `app.py`
 5. Add secret:
 
 ```toml
-GEMINI_API_KEY=My_Gemini_API_Key
+GROQ_API_KEY="my_groq_api_key"
 ```
 
 ---
 
-# 🧠 Prompt Engineering Used
+# 🧠 AI & Prompt Engineering
 
-## Question Generation Prompt
+## Dynamic Question Generation
 
-The assistant uses prompts to generate technical interview questions according to the candidate's declared tech stack.
+The assistant generates interview questions dynamically according to the candidate’s declared tech stack.
 
-## Answer Evaluation Prompt
+## AI Answer Evaluation
 
-The assistant evaluates candidate answers using AI and returns:
+The AI model evaluates candidate responses and returns:
 
-* Score
-* Feedback
-* Correctness level
+- Technical score
+- Feedback
+- Evaluation result
 
 ---
 
 # 🔐 Data Privacy
 
-* Candidate data is stored locally for demo purposes.
-* No personal data is shared externally except AI evaluation requests.
-* API keys are stored securely using `.env` or Streamlit Secrets.
+- Candidate data is stored locally for demo purposes.
+- No personal data is shared externally except AI evaluation requests.
+- API keys are securely stored using `.env` or Streamlit Secrets.
 
 ---
 
@@ -219,35 +231,42 @@ The assistant evaluates candidate answers using AI and returns:
 
 During development, the following challenges were addressed:
 
-* Streamlit rerun issues using `session_state`
-* Dynamic multi-step workflow
-* Gemini API integration
-* AI response parsing
-* Blank answer handling
-* Candidate data storage
+- Streamlit rerun issues using `session_state`
+- Multi-step workflow handling
+- Groq API integration
+- AI response parsing
+- API rate limit handling
+- Stable fallback evaluation system
+- Blank answer handling
+- Candidate data storage
 
 ---
 
 # 📈 Future Improvements
 
-* Resume Upload Feature
-* Recruiter Admin Dashboard
-* PDF Report Export
-* Candidate Ranking System
-* Multi-language Support
-* Email Notifications
+- Resume Upload Feature
+- Recruiter Admin Dashboard
+- Candidate Ranking System
+- PDF Report Export
+- Email Notifications
+- Multi-language Support
+- Voice-Based Interview Assistant
 
 ---
 
 # 👨‍💻 Author
 
-**Akarsh Kumar**
+## Akarsh Kumar
 
 B.Tech CSE (AI/ML) Student
-Passionate about AI, Machine Learning, and Real-World Product Development.
+
+Passionate about:
+- Artificial Intelligence
+- Machine Learning
+- Real-World Product Development
 
 ---
 
 # ⭐ Final Note
 
-This project was developed as part of an AI/ML Internship Assignment to demonstrate the practical implementation of LLM-powered hiring automation.
+This project was developed as part of an AI/ML Internship Assignment to demonstrate the practical implementation of AI-powered hiring automation using Large Language Models.
