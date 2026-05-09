@@ -2,21 +2,20 @@ import os
 import json
 import random
 import streamlit as st
-import google.generativeai as genai
+from groq import Groq
 from dotenv import load_dotenv
 
-# 🔐 Load environment variables
+# 🔐 Load environment
 load_dotenv(override=True)
 
-# 🔐 Secure API key loading
-key = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
+# 🔐 Secure API key
+key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 
-# 🤖 Configure Gemini model safely
+# 🤖 Configure Groq client
 if key:
-    genai.configure(api_key=key)
-    model = genai.GenerativeModel("models/gemini-1.5-flash")
+    client = Groq(api_key=key)
 else:
-    model = None
+    client = None
 
 
 # 🎯 Fallback Question Bank
@@ -44,28 +43,31 @@ BANK = {
 }
 
 
-# 🧠 Dynamic AI Question Generation
+# 🧠 Generate Questions
 def generate_questions(tech):
 
     skills = [x.strip().lower() for x in tech.split(",")]
 
-    # 🔥 Fallback questions
     fallback_questions = []
 
     for skill in skills:
+
         if skill in BANK:
+
             fallback_questions.extend(
                 random.sample(BANK[skill], min(2, len(BANK[skill])))
             )
+
         else:
+
             fallback_questions.append(
                 f"Explain your experience with {skill}."
             )
 
     fallback_questions = fallback_questions[:5]
 
-    # ❌ If AI unavailable
-    if not model:
+    # If AI unavailable
+    if not client:
         return fallback_questions
 
     prompt = f"""
@@ -76,26 +78,30 @@ Generate 5 technical interview questions based on these technologies:
 {tech}
 
 Rules:
-- Questions should be beginner to intermediate level
-- Focus on practical understanding
-- Questions should be concise
+- Beginner to intermediate level
+- Practical understanding focused
 - Return ONLY a Python list
 
 Example:
 [
-    "What is JOIN in SQL?",
-    "Explain OOP in Python."
+    "Explain OOP in Python.",
+    "What is JOIN in SQL?"
 ]
 """
 
     try:
-        response = model.generate_content(prompt)
 
-        text = response.text.strip()
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
 
-        # Clean markdown formatting
-        text = text.replace("```python", "")
-        text = text.replace("```", "").strip()
+        text = completion.choices[0].message.content.strip()
 
         start = text.find("[")
         end = text.rfind("]") + 1
@@ -114,16 +120,14 @@ Example:
         return fallback_questions
 
 
-# 🟡 Local Fallback Evaluator
+# 🟡 Local fallback evaluator
 def local_evaluate(question, answer):
 
     keywords = {
         "primary key": ["unique", "not null", "identifier"],
-        "join": ["combine", "tables", "rows", "condition"],
-        "where and having": ["where", "having", "group by"],
-        "oop": ["class", "object", "inheritance", "polymorphism"],
-        "react": ["component", "state", "props"],
-        "machine learning": ["model", "training", "data"]
+        "join": ["combine", "tables", "rows"],
+        "oop": ["class", "object", "inheritance"],
+        "react": ["component", "state", "props"]
     }
 
     score = 0
@@ -142,16 +146,16 @@ def local_evaluate(question, answer):
     score = min(score, 10)
 
     if score >= 8:
-        feedback = "Good technical understanding shown in the answer."
+        feedback = "Good technical understanding shown."
 
     elif score >= 5:
-        feedback = "The answer includes some relevant concepts but lacks detailed explanation."
+        feedback = "Answer contains some relevant concepts."
 
     elif score > 0:
-        feedback = "Basic understanding detected, but the answer is incomplete."
+        feedback = "Basic understanding detected."
 
     else:
-        feedback = "The answer does not contain enough relevant technical concepts."
+        feedback = "Insufficient technical explanation."
 
     return {
         "score": score if score > 0 else 5,
@@ -160,7 +164,7 @@ def local_evaluate(question, answer):
     }
 
 
-# ⚡ Cache AI evaluation to reduce API usage
+# ⚡ AI evaluation with caching
 @st.cache_data
 def cached_ai_eval(question, answer):
 
@@ -176,26 +180,29 @@ Candidate Answer:
 {answer}
 
 Rules:
-- Give a score out of 10
+- Give score out of 10
 - Be strict but fair
-- Give concise technical feedback
 - Return ONLY valid JSON
 
 Example:
 {{
     "score": 8,
-    "feedback": "Good understanding of SQL joins.",
+    "feedback": "Good understanding.",
     "result": "Correct"
 }}
 """
 
-    response = model.generate_content(prompt)
+    completion = client.chat.completions.create(
+        model="llama3-8b-8192",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
 
-    text = response.text.strip()
-
-    # Clean markdown formatting
-    text = text.replace("```json", "")
-    text = text.replace("```", "").strip()
+    text = completion.choices[0].message.content.strip()
 
     start = text.find("{")
     end = text.rfind("}") + 1
@@ -203,23 +210,19 @@ Example:
     if start == -1 or end == 0:
         raise Exception("Invalid JSON")
 
-    json_text = text[start:end]
-
-    data = json.loads(json_text)
+    data = json.loads(text[start:end])
 
     return {
         "score": int(data.get("score", 6)),
-        "feedback": data.get("feedback", "Answer evaluated."),
+        "feedback": data.get("feedback", "Evaluated."),
         "result": data.get("result", "Partial")
     }
 
 
-# 🧠 Main Evaluation Function
+# 🧠 Main evaluation function
 def evaluate_answer(question, answer, index=0):
 
-    # ❌ Empty Answer
     if answer.strip() == "":
-
         return {
             "score": 0,
             "feedback": "No answer submitted.",
@@ -227,28 +230,13 @@ def evaluate_answer(question, answer, index=0):
         }
 
     # 🔥 Use AI only for first 2 questions
-    if index < 2 and model:
+    if index < 2 and client:
 
         try:
             return cached_ai_eval(question, answer)
 
-        except Exception as e:
-
-            error_text = str(e).lower()
-
-            # 🚨 Handle quota / API errors safely
-            if (
-                "quota" in error_text
-                or "rate" in error_text
-                or "api key" in error_text
-                or "403" in error_text
-            ):
-
-                return local_evaluate(question, answer)
-
-            # Generic fallback
+        except:
             return local_evaluate(question, answer)
 
-    # 🟡 Local fallback for remaining questions
+    # 🟡 Fallback
     return local_evaluate(question, answer)
-        
